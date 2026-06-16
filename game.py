@@ -129,8 +129,8 @@ class Game:
 
         if self.menu_page == "controls":
             return [
-                {"label": "W/S/A/D: Mover", "enabled": False, "action": lambda: None},
-                {"label": "Q/E: Girar câmera", "enabled": False, "action": lambda: None},
+                {"label": "W/S/A/D: Mover relativo a camera", "enabled": False, "action": lambda: None},
+                {"label": "Q/E: Girar camera e agente", "enabled": False, "action": lambda: None},
                 {"label": "R/F: Subir ou baixar câmera", "enabled": False, "action": lambda: None},
                 {"label": "Z/X: Aproximar ou afastar", "enabled": False, "action": lambda: None},
                 {"label": "Enter / Espaco: Selecionar", "enabled": False, "action": lambda: None},
@@ -184,7 +184,7 @@ class Game:
 
         keys = pygame.key.get_pressed()
         self.camera.update(keys)
-        self.player.update(keys, self.world)
+        self.player.update(keys, self.world, self.camera.yaw)
         self.world.update(self.player, self.audio)
 
         self.session_best_level = max(self.session_best_level, self.world.level)
@@ -286,7 +286,7 @@ class Game:
         self.draw_text(f"Fase {self.world.level}/{self.world.max_level}", 24, 20, self.small_font, (245, 245, 245))
         self.draw_text(f"Cristais {self.world.collected}/{self.world.total_crystals}", 24, 46, self.small_font, (100, 235, 255))
         self.draw_text(f"Tempo {elapsed:.1f}s", 24, 72, self.small_font, (245, 220, 150))
-        self.draw_text("Camera Q/E Gira | R/F Altura | Z/X Zoom", 24, 98, self.small_font, (185, 195, 210))
+        self.draw_text("Q/E giram camera/agente | R/F Altura | Z/X Zoom", 24, 98, self.small_font, (185, 195, 210))
 
     def draw_center_message(self, title, subtitle):
         self.draw_panel(285, 235, 500, 150)

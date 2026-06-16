@@ -10,9 +10,9 @@ class Camera:
         self.distance = 10
 
     def update(self, keys):
-        if keys[ord("q")]:
+        if keys[ord("d")]:
             self.yaw -= 1.8
-        if keys[ord("e")]:
+        if keys[ord("a")]:
             self.yaw += 1.8
         if keys[ord("r")]:
             self.height = min(14, self.height + 0.12)
