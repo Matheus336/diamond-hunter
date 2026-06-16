@@ -115,33 +115,33 @@ class Game:
             return [
                 {"label": "Continuar", "enabled": True, "action": self.resume_game},
                 {"label": "Reiniciar fase", "enabled": True, "action": self.restart_level},
-                {"label": "Opcoes", "enabled": True, "action": self.open_options},
+                {"label": "Opções", "enabled": True, "action": self.open_options},
                 {"label": "Voltar ao menu", "enabled": True, "action": self.open_main_menu},
                 {"label": "Sair", "enabled": True, "action": self.quit_game},
             ]
 
         if self.menu_page == "options":
             return [
-                {"id": "music", "label": f"Musica: {int(self.audio.music_volume * 100)}%", "enabled": True, "action": lambda: None},
+                {"id": "music", "label": f"Música: {int(self.audio.music_volume * 100)}%", "enabled": True, "action": lambda: None},
                 {"id": "effects", "label": f"Efeitos: {int(self.audio.effects_volume * 100)}%", "enabled": True, "action": lambda: None},
                 {"id": "back", "label": "Voltar", "enabled": True, "action": self.open_main_menu},
             ]
 
         if self.menu_page == "controls":
             return [
-                {"label": "WASD / Setas: mover", "enabled": False, "action": lambda: None},
-                {"label": "Q/E: girar camera", "enabled": False, "action": lambda: None},
-                {"label": "R/F: subir ou baixar camera", "enabled": False, "action": lambda: None},
-                {"label": "Z/X: aproximar ou afastar", "enabled": False, "action": lambda: None},
-                {"label": "Enter / Espaco: selecionar", "enabled": False, "action": lambda: None},
-                {"label": "Esc: pausar ou voltar", "enabled": False, "action": lambda: None},
+                {"label": "W/S/A/D: Mover", "enabled": False, "action": lambda: None},
+                {"label": "Q/E: Girar câmera", "enabled": False, "action": lambda: None},
+                {"label": "R/F: Subir ou baixar câmera", "enabled": False, "action": lambda: None},
+                {"label": "Z/X: Aproximar ou afastar", "enabled": False, "action": lambda: None},
+                {"label": "Enter / Espaco: Selecionar", "enabled": False, "action": lambda: None},
+                {"label": "Esc: Pausar ou voltar", "enabled": False, "action": lambda: None},
                 {"label": "Voltar", "enabled": True, "action": self.open_main_menu},
             ]
 
         return [
             {"label": "Iniciar jogo", "enabled": True, "action": self.start_new_game},
             {"label": "Continuar", "enabled": self.has_started, "action": self.resume_game},
-            {"label": "Opcoes", "enabled": True, "action": self.open_options},
+            {"label": "Opções", "enabled": True, "action": self.open_options},
             {"label": "Controles", "enabled": True, "action": self.open_controls},
             {"label": "Sair", "enabled": True, "action": self.quit_game},
         ]
@@ -212,21 +212,21 @@ class Game:
         self.draw_hud()
 
         if self.state == "level_complete":
-            self.draw_center_message("Fase concluida!", "Pressione Enter para avancar")
+            self.draw_center_message("Fase concluída!", "Pressione Enter para avançar")
         elif self.state == "victory":
-            self.draw_center_message("Voce venceu!", "Pressione Enter para voltar ao menu")
+            self.draw_center_message("Você venceu!", "Pressione Enter para voltar ao menu")
 
     def render_menu(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         self.draw_menu_background()
 
-        title = "LABIRINTO DE DIAMANTES"
-        subtitle = "Colete todos os cristais e avance por fases mais dificeis"
+        title = "DIAMOND HUNTER"
+        subtitle = "Colete todos os cristais em uma sala com obstáculos para vencer"
         if self.menu_page == "pause":
             title = "PAUSADO"
             subtitle = "A fase continua exatamente daqui"
         elif self.menu_page == "options":
-            title = "OPCOES"
+            title = "OPÇÕES"
             subtitle = "Use A/D ou setas laterais para ajustar"
         elif self.menu_page == "controls":
             title = "CONTROLES"
@@ -250,11 +250,11 @@ class Game:
             self.draw_text(prefix + item["label"], 120, y, self.font, color)
             y += 48
 
-        self.draw_text("W/S navega  |  Enter seleciona  |  Esc volta/pausa", 74, 640, self.small_font, (150, 160, 174))
+        self.draw_text("W/S/A/D Navega  |  Enter Seleciona  |  Esc Volta/Pausa", 74, 640, self.small_font, (150, 160, 174))
 
     def best_text(self):
         best_time = "--" if self.best_completion_time is None else f"{self.best_completion_time:.1f}s"
-        return f"Melhor da sessao: fase {self.session_best_level} | cristais {self.session_best_collected} | melhor fase {best_time}"
+        return f"Melhor da Sessão: Fase {self.session_best_level} | Cristais {self.session_best_collected} | Melhor Fase {best_time}"
 
     def draw_menu_background(self):
         glDisable(GL_LIGHTING)
@@ -286,7 +286,7 @@ class Game:
         self.draw_text(f"Fase {self.world.level}/{self.world.max_level}", 24, 20, self.small_font, (245, 245, 245))
         self.draw_text(f"Cristais {self.world.collected}/{self.world.total_crystals}", 24, 46, self.small_font, (100, 235, 255))
         self.draw_text(f"Tempo {elapsed:.1f}s", 24, 72, self.small_font, (245, 220, 150))
-        self.draw_text("Camera Q/E gira  R/F altura  Z/X zoom", 24, 98, self.small_font, (185, 195, 210))
+        self.draw_text("Camera Q/E Gira | R/F Altura | Z/X Zoom", 24, 98, self.small_font, (185, 195, 210))
 
     def draw_center_message(self, title, subtitle):
         self.draw_panel(285, 235, 500, 150)
