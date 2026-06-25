@@ -31,9 +31,6 @@ class Renderer:
         glEnable(GL_COLOR_MATERIAL)
         glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
 
-    # =========================
-    # ESSENCIAL (o que estava faltando)
-    # =========================
     def begin_frame(self, camera):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 

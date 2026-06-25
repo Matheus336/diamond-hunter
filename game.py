@@ -130,7 +130,6 @@ class Game:
         if self.menu_page == "controls":
             return [
                 {"label": "W/S/A/D: Mover relativo a camera", "enabled": False, "action": lambda: None},
-                {"label": "Q/E: Girar camera e agente", "enabled": False, "action": lambda: None},
                 {"label": "R/F: Subir ou baixar câmera", "enabled": False, "action": lambda: None},
                 {"label": "Z/X: Aproximar ou afastar", "enabled": False, "action": lambda: None},
                 {"label": "Enter / Espaco: Selecionar", "enabled": False, "action": lambda: None},
